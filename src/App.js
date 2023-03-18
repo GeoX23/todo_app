@@ -7,6 +7,7 @@ import { nanoid } from 'nanoid';
 export default function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
 
+  // Completed or Not Functionality
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
       // if this task has the same ID as the edited task
@@ -24,6 +25,7 @@ export default function App(props) {
     console.log(updatedTasks);
   }
 
+  // Delete a Task
   function deleteTask(id) {
     console.log('Before Deletion', tasks);
     const deletedTasks = tasks.filter((task) => id !== task.id);
@@ -31,7 +33,19 @@ export default function App(props) {
     console.log('After Deletion', deletedTasks);
   }
 
-  function editTask(id) {}
+  // Edit Name/ToDo
+  function editTask(id, newName) {
+    const editedTaskList = tasks.map((task) => {
+      // if this task has the same ID as the edited task
+      if (id === task.id) {
+        // return statement
+        return { ...task, name: newName };
+      }
+      return task;
+    });
+    setTasks(editedTaskList);
+  }
+
   const taskList = tasks?.map((task) => (
     <Todo
       name={task.name}
@@ -40,6 +54,7 @@ export default function App(props) {
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
       deleteTask={deleteTask}
+      editTask={editTask}
     />
   ));
 
