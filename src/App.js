@@ -88,18 +88,23 @@ export default function App(props) {
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
   function addTask(name) {
-    const newTask = {
-      id: `todo-${nanoid()}`,
-      name,
-      completed: false,
-    };
-    setTasks([...tasks, newTask]);
-    console.log(tasks);
+    // Check if Task's Name is empty
+    if (name === '') {
+      alert('Please enter Task Name');
+    } else {
+      const newTask = {
+        id: `todo-${nanoid()}`,
+        name,
+        completed: false,
+      };
+      setTasks([...tasks, newTask]);
+      console.log(tasks);
+    }
   }
 
   return (
     <div className='todoapp stack-large'>
-      <h1>TodoMatic</h1>
+      <h1>ToDo or NotToDo</h1>
       <Form addTask={addTask} />
       <div className='filters btn-group stack-exception'>{filterList}</div>
       <h2 id='list-heading'>{headingText}</h2>
