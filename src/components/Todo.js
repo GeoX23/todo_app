@@ -4,16 +4,23 @@ export default function Todo(props) {
   const [isEditing, setIsEditing] = useState(false);
 
   const [newName, setNewName] = useState();
+  const [newDescription, setNewDescription] = useState();
 
   // Change a Task's Name
   function handleChange(e) {
     setNewName(e.target.value);
   }
 
+  // Change a Task's Name
+  function handleChangeDescription(e) {
+    setNewDescription(e.target.value);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    props.editTask(props.id, newName);
-    setNewName('');
+    if (newName.length > 0) {
+      props.editTask(props.id, newName, newDescription);
+    }
     setIsEditing(false);
   }
 
@@ -22,14 +29,28 @@ export default function Todo(props) {
     <form className='stack-small' onSubmit={handleSubmit}>
       <div className='form-group'>
         <label className='todo-label' htmlFor={props.id}>
-          New name for {props.name}
+          New name for <b>{props.name}</b>
         </label>
+        <br />
+        <span id='noEmpty'>*Can't be empty</span>
         <input
           id={props.id}
           className='todo-text'
           type='text'
           value={newName}
           onChange={handleChange}
+        />
+      </div>
+      <div className='form-group'>
+        <label className='todo-description' htmlFor={props.id}>
+          Add short description for <b>{props.name}</b>
+        </label>
+        <input
+          id={props.id}
+          className='todo-text-description'
+          type='text'
+          value={newDescription}
+          onChange={handleChangeDescription}
         />
       </div>
       <div className='btn-group'>
@@ -60,6 +81,9 @@ export default function Todo(props) {
         />
         <label className='todo-label' htmlFor={props.id}>
           {props.name}
+        </label>
+        <label className='todo-description' htmlFor={props.id}>
+          {props.description}
         </label>
       </div>
       <div className='btn-group'>
