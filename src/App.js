@@ -43,12 +43,12 @@ export default function App(props) {
   }
 
   // Edit Name/ToDo
-  function editTask(id, newName) {
+  function editTask(id, newName, newDescription) {
     const editedTaskList = tasks.map((task) => {
       // if this task has the same ID as the edited task
       if (id === task.id) {
         // return statement
-        return { ...task, name: newName };
+        return { ...task, name: newName, description: newDescription };
       }
       return task;
     });
@@ -65,6 +65,7 @@ export default function App(props) {
         name={task.name}
         completed={task.completed}
         key={task.id}
+        description={task.description}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
         editTask={editTask}
@@ -96,6 +97,7 @@ export default function App(props) {
         id: `todo-${nanoid()}`,
         name,
         completed: false,
+        description: '',
       };
       setTasks([...tasks, newTask]);
       console.log(tasks);
