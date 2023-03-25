@@ -3,22 +3,31 @@ import React, { useState } from 'react';
 export default function Todo(props) {
   const [isEditing, setIsEditing] = useState(false);
 
-  const [newName, setNewName] = useState();
+  const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState();
+
+  // Set the Task Name as prefilled in Edit Area
+  function editName(e) {
+    if (newName === '') {
+      setNewName(e.target.placeholder);
+    }
+  }
 
   // Change a Task's Name
   function handleChange(e) {
     setNewName(e.target.value);
   }
 
-  // Change a Task's Name
+  // Change a Description's Text
   function handleChangeDescription(e) {
     setNewDescription(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (newName.length > 0) {
+    if (newName === '') {
+      props.editTask(props.id, props.name, newDescription);
+    } else {
       props.editTask(props.id, newName, newDescription);
     }
     setIsEditing(false);
@@ -38,6 +47,8 @@ export default function Todo(props) {
           className='todo-text'
           type='text'
           value={newName}
+          placeholder={props.name}
+          onClick={editName}
           onChange={handleChange}
         />
       </div>
@@ -50,6 +61,7 @@ export default function Todo(props) {
           className='todo-text-description'
           type='text'
           value={newDescription}
+          onClick={editName}
           onChange={handleChangeDescription}
         />
       </div>
