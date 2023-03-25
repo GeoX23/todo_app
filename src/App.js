@@ -67,8 +67,8 @@ export default function App(props) {
         key={task.id}
         description={task.description}
         toggleTaskCompleted={toggleTaskCompleted}
-        deleteTask={deleteTask}
         editTask={editTask}
+        deleteTask={deleteTask}
       />
     ));
 
@@ -97,7 +97,7 @@ export default function App(props) {
         id: `todo-${nanoid()}`,
         name,
         completed: false,
-        description: '',
+        description: 'Add a short Desc',
       };
       setTasks([...tasks, newTask]);
       console.log(tasks);
