@@ -21,6 +21,14 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+#subTitle {
+  margin: auto;
+  position: relative;
+  display: block;
+  text-align: center;
+}
+
 button {
   border: none;
   margin: 0;
