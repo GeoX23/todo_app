@@ -106,7 +106,7 @@ export default function App(props) {
 
   return (
     <div className='todoapp stack-large'>
-      <h1>ToDo or NotToDo</h1>
+      <h1>BrainList</h1>
       <Form addTask={addTask} />
       <div className='filters btn-group stack-exception'>{filterList}</div>
       <h2 id='list-heading'>{headingText}</h2>
